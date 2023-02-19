@@ -1,96 +1,91 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {useHistory ,Link} from 'react-router-dom'
+import {useNavigate ,Link} from 'react-router-dom';
 import { registerInitiate } from '../Redux/action';
+
 const Register = () => {
-    const [state,setState]=useState({
-     displayName: '', 
-        email:'',
-       password:'',
-       passwordConfirm:''
-      });
-
-      const currentUser = useSelector ((state)=> state.user);
-      const history = useHistory();
-
-      useEffect (()=>{
-        if(currentUser){
-          history.push("/")
-        }
-      },[currentUser , history]);
-
-      const dispatch = useDispatch ();
-      const {email,password,displayName,passwordConfirm}=state;
+  const {state,setState}=useState({
+  displayName:"",
+    email:"",
+   password:"",
+   passwordConfrim:"",
+   })
+   const { currentUser } = useSelector((state)=> state.user);
+  const {email,password,displayName,passwordConfrim}=useState;
    
-    
-    const handleSubmit= (e)=>{
-      e.preventDefault();
-      if(password !== passwordConfirm) {
-      return;
-      }
-      dispatch(registerInitiate(email,password,displayName));
-      setState({email:"", displayName : "", password:"", passwordConfirm:""})
+  const history= useNavigate();
+  useEffect(()=>{
+    if(currentUser){
+      history.push("/")
     }
-    const handleChange= (e)=>{
-      let {name ,value} = e.target;
-      setState ({...state, [name]: value})
-    }
-    
-      
-      
-      
-     
-      
-    return (
-        <div>
-          <div id='logreg-from'>
-            <form className='form-signup' onSubmit={handleSubmit}>
-               <h1>sign Up</h1>
-              
-               <input 
-                 type='text'
-                id='inputName'
-                placeholder='Full Name'
-                name='displayName'
-                onChange={handleChange}
-                 value={displayName}
-                required
-                 />
-                 <input 
-                 type='email'
-                id='inputEmail'
-                placeholder='EmailAddress'
-                name='email'
-                onChange={handleChange}
-                 value={email}
-                required
-                 />
-                 <input 
-                 type='password'
-                id='inputpassword'
-                placeholder='Password'
-                name='password'
-                onChange={handleChange}
-                value={password}
-                required
-                 />
-                   <input 
-                 type='password'
-                id='inputpassword'
-                placeholder='Repeat Password'
-                name='passwordConfirm'
-                onChange={handleChange}
-                value={passwordConfirm}
-                required
-                 />
-                 <button type='submit'>sign Up</button>
-                 <Link to='/login'></Link>
-              
-            </form>
+  },[currentUser , history]);
+  const dispatch=useDispatch();
+
+  const handleSubmit= (e)=>{
+  e.preventDefault();
+  if(password !== passwordConfrim){
+    return;
+  }
+  dispatch(registerInitiate(email, password,displayName));
+  setState({email:"", displayName:"", password:"",passwordConfrim:""})
+  }
+
+ const handleChange= (e) => {
+  let {name,value}=e.target;
+  setState({...state,[name]:value})
+ }
+   
+   return (
+    <div>
+      <div id='logreg-from'>
+        <form className='form-signin' onSubmit={handleSubmit}>
+           <h1>Register</h1>
+           <div>
+           <input 
+             type='text'
+             placeholder='Full Name'
+            name='displayName'
+            onChange={handleChange}
+            value={displayName}
+            required
+             />
+             <input 
+             type='email'
+            id='inputEmail'
+            placeholder='EmailAddress'
+            name='email'
+            onChange={handleChange}
+            value={email}
+            required
+             />
+             <input 
+             type='password'
+            id='inputpassword'
+            placeholder='Password'
+            name='password'
+             onChange={handleChange}
+            value={password}
+            required
+             />
+             <input 
+             type='password'
+            id='inputpassword'
+            placeholder=' Confrim Password'
+            name='passwordConfrim'
+             onChange={handleChange}
+            value={passwordConfrim}
+            required
+             />
+             <button type='submit'>sign Up</button>
+             
+             <Link to='/login'> 
+              <button type='submit'>Back</button>
+             </Link>
            </div>
-        </div>
-      )
-    }
-    
-    export default Register;
-    
+        </form>
+       </div>
+    </div>
+  )
+}
+
+export default Register;
