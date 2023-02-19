@@ -1,17 +1,40 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import {useHistory ,Link} from 'react-router-dom'
+import { registerInitiate } from '../Redux/action';
 const Register = () => {
-    // const [state,useState]=useState({
-    //     email:'',
-    //     password:'',
-    //   })
-    //   const {email,password}=state;
-    const handleGoogleSignIn= ()=>{}
-    const handleFBSignIn= ()=>{}
+    const [state,setState]=useState({
+     displayName: '', 
+        email:'',
+       password:'',
+       passwordConfirm:''
+      });
+
+      const currentUser = useSelector ((state)=> state.user);
+      const history = useHistory();
+
+      useEffect (()=>{
+        if(currentUser){
+          history.push("/")
+        }
+      },[currentUser , history]);
+
+      const dispatch = useDispatch ();
+      const {email,password,displayName,passwordConfirm}=state;
+   
     
-    const handleSubmit= ()=>{}
-    const handleChange= ()=>{}
+    const handleSubmit= (e)=>{
+      e.preventDefault();
+      if(password !== passwordConfirm) {
+      return;
+      }
+      dispatch(registerInitiate(email,password,displayName));
+      setState({email:"", displayName : "", password:"", passwordConfirm:""})
+    }
+    const handleChange= (e)=>{
+      let {name ,value} = e.target;
+      setState ({...state, [name]: value})
+    }
     
       
       
@@ -21,27 +44,25 @@ const Register = () => {
     return (
         <div>
           <div id='logreg-from'>
-            <form className='form-signin' onSubmit={handleSubmit}>
-               <h1>signin</h1>
-               <div>
-                 <button type='button' onClick={handleGoogleSignIn}>
-                  <span>
-                    <i className='fab fa-google-plus-g '>sign in with google</i>
-                  </span>
-                 </button>
-                 <button type='button' onClick={handleFBSignIn}>
-                  <span>
-                    <i className='fab fa-google-plus-g '>sign in with Facebook</i>
-                  </span>
-                 </button>
-                 <p>or</p>
+            <form className='form-signup' onSubmit={handleSubmit}>
+               <h1>sign Up</h1>
+              
+               <input 
+                 type='text'
+                id='inputName'
+                placeholder='Full Name'
+                name='displayName'
+                onChange={handleChange}
+                 value={displayName}
+                required
+                 />
                  <input 
                  type='email'
                 id='inputEmail'
                 placeholder='EmailAddress'
                 name='email'
                 onChange={handleChange}
-                // value={email}
+                 value={email}
                 required
                  />
                  <input 
@@ -50,21 +71,26 @@ const Register = () => {
                 placeholder='Password'
                 name='password'
                 onChange={handleChange}
-                // value={password}
+                value={password}
                 required
                  />
-                 <button type='submit'>sign In</button>
-                 <hr/>
-                 <p>Don't have account</p>
-                 <Link to='/register'> 
-                  <button type='submit'>sign Up new account</button>
-                 </Link>
-               </div>
+                   <input 
+                 type='password'
+                id='inputpassword'
+                placeholder='Repeat Password'
+                name='passwordConfirm'
+                onChange={handleChange}
+                value={passwordConfirm}
+                required
+                 />
+                 <button type='submit'>sign Up</button>
+                 <Link to='/login'></Link>
+              
             </form>
            </div>
         </div>
       )
     }
     
-    export default Register
+    export default Register;
     
