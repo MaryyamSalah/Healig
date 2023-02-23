@@ -1,4 +1,4 @@
-import * as types from './actionType';
+import * as types from './actionTypes';
 import {auth} from "../firebase"
 
 const registerStart = () => ({
@@ -17,7 +17,7 @@ const registerFail = (error) => ({
 
 export const registerInitiate = (email , password , displayName) => {
     return function (dispatch){
-        dispatch (registerStart);
+        dispatch (registerStart());
         auth.createUserWithEmailAndPassword(email , password).then (({user})=>{
             user.updateProfile({
                 displayName

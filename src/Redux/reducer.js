@@ -1,4 +1,4 @@
-import * as types from './actionType';
+import * as types from './actionTypes';
 
 
 const initialState ={
@@ -26,7 +26,7 @@ const userReducer = (state = initialState , action) =>{
                     return {
                         ...state,
                         loading: false,
-                        error : action.error,
+                        error : action.payload,
                     }
     default:
         return (
