@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 //import firebase from 'firebase/compat/app';
-import 'firebase/auth'
+import 'firebase/auth';
 import { getAuth, GoogleAuthProvider,FacebookAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
