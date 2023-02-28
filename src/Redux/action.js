@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
-import {auth} from '../firebase';
+//import {auth} from '../firebase';
+import { createUserWithEmailAndPassword ,signInWithEmailAndPassword, signOut} from "firebase/auth";
 
 const registerStart = () => ({
     type : types.REGISTER_START,
@@ -46,7 +47,7 @@ const logoutFail = (error) => ({
 export const registerInitiate = (email , password , displayName) => {
     return function (dispatch){
         dispatch (registerStart());
-        auth.createUserWithEmailAndPassword(email , password).then (({user})=>{
+        createUserWithEmailAndPassword(email , password).then (({user})=>{
             user.updateProfile({
                 displayName
             })
@@ -59,7 +60,7 @@ export const registerInitiate = (email , password , displayName) => {
 export const loginInitiate = (email , password) => {
     return function (dispatch){
         dispatch (loginStart());
-        auth.signInWithEmailAndPassword(email , password).then (({user})=>{
+        signInWithEmailAndPassword(email , password).then (({user})=>{
            
             dispatch(loginSuccess(user))
         })
@@ -70,7 +71,7 @@ export const loginInitiate = (email , password) => {
 export const logoutInitiate = () => {
     return function (dispatch){
         dispatch (logoutStart());
-        auth.signOut().then ((resp)=>
+        signOut().then ((resp)=>
            
             dispatch(logoutSuccess())
     )
