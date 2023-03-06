@@ -1,6 +1,6 @@
-import React ,{useEffect} from 'react';
 import './App.css';
-import {BrowserRouter,Routes, Route  } from 'react-router-dom';
+import React  from 'react';
+import {BrowserRouter as Router,Route, Routes  } from 'react-router-dom';
 import Home from './Pages/home';
 import Login from './Pages/login';
 import Register from './Pages/register';
@@ -23,19 +23,17 @@ function App() {
 
   // },[dispatch])
   return (
-     
-     
-  <BrowserRouter>
-  <div className="App">
-        <Routes>
-        <UserRoute exact path='/'  element={ <Home />} />
-            {/* <Route path="/" element={<Home />} /> */}
+     <div className ='App'>
+     <Router>
+<Routes>
+        <Route exact path='/'  element={ <UserRoute/>} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register /> } />
-    
+
         </Routes>
+        </Router>
         </div>
-        </BrowserRouter>
     
   );
 }
