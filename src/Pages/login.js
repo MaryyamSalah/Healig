@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import {useNavigate ,Link} from 'react-router-dom'
-import { loginInitiate } from '../Redux/action';
+import { facebookSignInInitiate, googleSignInInitiate, loginInitiate } from '../Redux/action';
 const Login = () => {
     const [state,setState]=useState({
         email:'',
@@ -25,8 +25,12 @@ const Login = () => {
 
 
 
-    const handleGoogleSignIn= ()=>{}
-    const handleFBSignIn= ()=>{}
+    const handleGoogleSignIn= ()=>{
+      dispatch(googleSignInInitiate());
+    }
+    const handleFBSignIn= ()=>{
+      dispatch(facebookSignInInitiate());
+    }
     
     const handleSubmit= (e)=>{
       e.preventDefault();
