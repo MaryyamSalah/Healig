@@ -2,13 +2,24 @@ import * as types from './actionTypes';
 
 
 const initialState ={
+posts :[],
 loading : false,
 currentUser:null,
-error:null
+error:null,
+hasErrors :false,
 };
 
 const userReducer = (state = initialState , action) =>{
     switch (action.type){
+
+            case types.GET_POSTS:
+                return { ...state,loading:true}
+            case types.GET_POSTS_SUCCESS:
+                return{ posts:action.payload,loading:false,hasErrors:false}
+            case types.GET_POSTS_FAILURE:
+                return{ ...state,loading:false ,hasErrors:true}
+
+
         case types.REGISTER_START:
             case types.LOGIN_START:
                 case types.LOGOUT_START:

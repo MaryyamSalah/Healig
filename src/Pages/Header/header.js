@@ -24,7 +24,7 @@ export default function Header() {
         <li className="text-white hover:text-indigo-200">
         <Link to="/contact">Contact Us</Link></li>
         <li className="text-white hover:text-indigo-200">
-        <Link to="/blogs">Blogs</Link></li>
+        <Link to="/posts">Blogs</Link></li>
         <li className="px-4 py-2 text-white hover:text-black bg-purple-900 rounded-md shadow hover:bg-gray-100">
         <Link to="/login">Sign In</Link></li>
         <li className="px-4 py-2 text-black hover:text-purple-700 bg-purple-100 rounded-md shadow hover:bg-gray-100">
