@@ -19,7 +19,7 @@ const Blogs = ({dispatch, loading, posts, hasErrors}) => {
  
     return (
     <section>
-    <h1>Posts</h1>
+    <h1 className="my-4 text-xl font-bold text-purple-900">Posts</h1>
     {renderPosts()}
   </section>
   )
