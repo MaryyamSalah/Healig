@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch , useSelector} from 'react-redux'
 import { logoutInitiate } from '../../Redux/action';
-import RecentBlogs from './recentBlogs';
 import {Link} from 'react-router-dom';
 
 const Home = () => {
