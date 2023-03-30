@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Creating login/ logout page with React-Redux
+Creating SignIn/ SignUp page with React-Redux
 Demo:https://loginandlogout.netlify.app/
 
 ## Available Scripts
